@@ -1,0 +1,35 @@
+{
+    "name": "vuravel/form",
+    "description": "Laravel & Vue.js FullStack Forms Generator - The raddest out there! ",
+    "keywords": [
+        "laravel",
+        "forms",
+        "vuravel",
+        "generator"
+    ],
+    "license": "MIT",
+    "require": {
+    	"php": ">=7.1.0",
+        "laravel/framework": ">=5.6.0",
+        "vuravel/elements": "dev-master",
+        "intervention/image": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vuravel\\Form\\": "src/",
+            "Vuravel\\Form\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vuravel\\Form\\VuravelFormServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

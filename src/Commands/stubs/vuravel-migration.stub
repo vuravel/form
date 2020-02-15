@@ -1,0 +1,60 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Create{Model}sTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{model}s', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->string('name');
+            $table->string('type');
+            $table->boolean('known')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('address_line_1')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('country')->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+        
+        Schema::create('{pivot}_{model}', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('{pivot}_id')->unsigned()->index();
+            $table->foreign('{pivot}_id')->references('id')->on('beings')->onDelete('cascade');
+
+            $table->integer('{model}_id')->unsigned()->index();
+            $table->foreign('{model}_id')->references('id')->on('{model}s')->onDelete('cascade');
+
+            $table->string('relationship');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{pivot}_{model}');
+        Schema::dropIfExists('{model}s');
+    }
+}

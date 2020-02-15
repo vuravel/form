@@ -1,0 +1,23 @@
+{
+  "name": "vuravel-form",
+  "version": "1.0.11",
+  "description": "Vuravel form components and mixins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue", "laravel", "components",
+    "form", "forms",
+    "validation", "style",
+    "map", "file", "upload", "select", "multiselect",
+    "input", "form-controls", "relationships"
+  ],
+  "author": "Seba Hachem <contact@vuravel.com> (https://vuravel.com)",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.7",
+    "vuravel-elements": "^1.0.0",
+    "vuedraggable": "^2.16.0"
+  }
+}

@@ -1,0 +1,9 @@
+//Only for direct childs of vlForm and vlRows. In Layouts or Catalogs, no margins.
+.vlFormMargin{
+	margin-top: $form-row-margin-t;
+	margin-bottom: $form-row-margin-b;
+}
+
+.vlFormField{
+	position: relative;
+}
