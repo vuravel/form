@@ -8,6 +8,12 @@ class Date extends Field
 {
     public $component = 'Date';
 
+    public $data = [
+        'icon' => 'icon-calendar',
+        'dateFormat' => 'Y-m-d',
+        'altFormat' => 'Y-m-d'
+    ];
+
     protected function vlInitialize($label)
     {
         parent::vlInitialize($label);
@@ -25,7 +31,7 @@ class Date extends Field
      */
     public function dateFormat($dateFormat = 'Y-m-d')
     {
-    	$this->data(['dateFormat' => $dateFormat]);
+    	$this->data(['altFormat' => $dateFormat]);
     	return $this;
     }
 

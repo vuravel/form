@@ -6,9 +6,25 @@ use Vuravel\Form\Field;
 
 class Time extends Field
 {
-    public $component = 'Time';
+    public $component = 'Date';
+
+    public $data = [
+        'icon' => 'icon-clock',
+        'enableTime' => true,
+        'noCalendar' => true,
+        'dateFormat' => 'H:i',
+        'altFormat' => 'H:i'
+    ];
 
     protected $savedAsDateTime = false;
+
+    protected function vlInitialize($label)
+    {
+        parent::vlInitialize($label);
+
+        if(config('vuravel.default_time_format'))
+           $this->timeFormat(config('vuravel.default_time_format'));
+    }
 
     /**
      * Sets a FlatPickr accepted time format. By default, it's 'H:i'.
@@ -19,7 +35,7 @@ class Time extends Field
      */
     public function timeFormat($timeFormat = 'H:i')
     {
-    	$this->data(['timeFormat' => $timeFormat]);
+    	$this->data(['altFormat' => $timeFormat]);
     	return $this;
     }
 
@@ -57,7 +73,7 @@ class Time extends Field
 
 	private function getTimeFormat()
 	{
-		return $this->data('timeFormat') ?: 'H:i';
+		return $this->data('altFormat') ?: 'H:i';
 	}
 
 }

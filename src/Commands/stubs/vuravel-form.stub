@@ -16,8 +16,8 @@ class DummyClass extends Form
 	{
 		//The component list for your form goes here, ex:
 		return [
-			// Input::form('first_name'),
-			// Button::form(__('Submit'))->submitsForm()
+			// Input::form('First Name'),
+			// Button::form('Submit')->submitsForm()
 		];
 	}
 
@@ -25,7 +25,7 @@ class DummyClass extends Form
 	{
 		return [
 			// Validation rules go here (see Laravel validation rules), ex:
-			// 'name' => 'required'
+			// 'first_name' => 'required'
     	];
 	}
 }
