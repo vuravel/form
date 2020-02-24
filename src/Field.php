@@ -97,7 +97,7 @@ class Field extends Component
      */
     protected function checkSetReadonly($form)
     {
-        if(method_exists($form, 'authorize')){
+        if(config('vuravel.smart_readonly_fields') && method_exists($form, 'authorize')){
 
             $authorization = $form->authorize();
             

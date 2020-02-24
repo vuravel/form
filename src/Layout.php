@@ -28,6 +28,9 @@ class Layout extends Component
         if($this instanceof Form)
             $form->addValidationRules($this->rules());
 
+        if($form->noMargins ?? false)
+            $this->noMargins();
+
     	collect($this->components)->each(function($component) use($form) {
 
     		$component->prepareComponent($form);
@@ -37,6 +40,16 @@ class Layout extends Component
     	});
 
         $this->mountedHook($form);
+    }
+
+    /**
+     * Removes the default margins applied to rows and columns layouts.
+     *
+     * @return     self
+     */
+    public function noMargins()
+    {
+        return $this->data(['noMargins' => true]);
     }
 
     public function getFieldComponents()

@@ -15,6 +15,8 @@ class Form extends Rows implements Routable
     public $menuComponent = 'Form';
     public $partial = 'VlForm';
 
+    public $noMargins = false;
+
     protected $preventSubmit = false; //prevent submitting a form (emits only)
     protected $emitFormData = true;
 
