@@ -10,7 +10,7 @@ class SelectLinks extends Select
 
     public $data = [
     	'noInputWrapper' => true,
-    	'containerClass' => 'vlFlex',
+    	'containerClass' => 'vlFlex vlJustifyBetween',
     	'optionClass' => '',
     	'optionInnerClass' => ''
     ];

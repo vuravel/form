@@ -138,8 +138,8 @@ class Form extends Rows implements Routable
         $this->data([
             'submitUrl' => $this->submitTo ? $this->guessRoute($this->submitTo) :
                 ($this->submitUrl() ? : 
-                    ((static::$model || $this->table) ? route(self::DB_UPDATE_ROUTE) : 
-                        (method_exists($this, 'handle') ? route(self::HANDLE_SUBMIT_ROUTE) : null ))),
+                    (method_exists($this, 'handle') ? route(self::HANDLE_SUBMIT_ROUTE) : 
+                        ((static::$model || $this->table) ? route(self::DB_UPDATE_ROUTE) : null ))),
             'submitMethod' => $this->submitMethod
         ]);
     }
