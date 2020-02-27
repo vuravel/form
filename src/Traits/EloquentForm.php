@@ -97,6 +97,7 @@ trait EloquentForm {
     public function updateRecordFromRequest($request)
     {
         $model = $this->newModelInstanceFromRequest($request);
+
         $this->beforeSaveHook($model);
 
         if(defined(get_class($model).'::CREATED_BY') && !$model->getKey() && $model::CREATED_BY)

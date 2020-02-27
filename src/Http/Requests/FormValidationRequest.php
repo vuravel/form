@@ -4,7 +4,6 @@ namespace Vuravel\Form\Http\Requests;
 
 use Vuravel\Core\Http\Requests\SessionAuthorizationRequest;
 
-
 class FormValidationRequest extends SessionAuthorizationRequest
 {
     /**

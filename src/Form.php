@@ -22,6 +22,7 @@ class Form extends Rows implements Routable
 
     protected $submitTo = null; //if the route is simple (no parameters)
     protected $submitMethod = 'POST';
+    //protected $failedAuthorizationMessage; //still active but removed so we can extend in Trait
 
     protected $redirectTo = null;
     protected $redirectMessage = 'Success! Redirecting...';
@@ -193,6 +194,11 @@ class Form extends Rows implements Routable
             return $this->response($model);
 
         return null;
+    }
+
+    public function getFailedAuthorizationMessage()
+    {
+        return $this->failedAuthorizationMessage ?? '';
     }
 
     /**
