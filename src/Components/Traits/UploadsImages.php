@@ -9,6 +9,19 @@ trait UploadsImages {
     protected $withThumbnail = false;
     protected $resizeForWeb = true;
 
+
+    /**
+     * Sets the uploaded image(s) thumbnail's CSS height.
+     *
+     * @param     string   $height  The height in rem, px, %...
+     *
+     * @return     self
+     */
+    public function thumbHeight($height)
+    {
+        return $this->data(['thumbHeight' => $height]);
+    }
+
 	/**
      * Does some common transformation on the $file object stored in DB.
      * (used for images)
