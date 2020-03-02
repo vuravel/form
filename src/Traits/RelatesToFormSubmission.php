@@ -4,29 +4,33 @@ namespace Vuravel\Form\Traits;
 trait RelatesToFormSubmission {
     
     /**
-     * Submits the form. The default trigger is:
+     * Submits the form. By default, it will submit to the handle method. The default trigger is:
      * On click for Buttons/Links.
      * On change for fields (after blur).
      *
+     * @param  string  $methodName    The class's method name that will handle the submit.
+     * 
      * @return self
      */
-    public function submitsForm()
+    public function submitsForm($methodName = null)
     {
-        return $this->updateDefaultTrigger(function($e) {
-            $e->submitsForm();
+        return $this->updateDefaultTrigger(function($e) use ($methodName) {
+            $e->submitsForm($methodName);
         });
     }
 
     /**
      * Submits the form when a user types in a field. By default, the request is debounced by 500ms.
      * 
+     * @param  string  $methodName    The class's method name that will handle the submit.
+     * 
      * @return self
      */
-    public function submitsOnInput()
+    public function submitsOnInput($methodName = null)
     {
-        return $this->onInput(function($e){
+        return $this->onInput(function($e) use ($methodName) {
             
-            $e->submitsForm()->debounce();
+            $e->submitsForm($methodName)->debounce();
             
         });
     }
@@ -34,12 +38,14 @@ trait RelatesToFormSubmission {
     /**
      * Submits the form when the ENTER key is released.
      *
+     * @param  string  $methodName    The class's method name that will handle the submit.
+     * 
      * @return self
      */
-    public function submitsOnEnter()
+    public function submitsOnEnter($methodName = null)
     {
-        return $this->onEnter(function($e){
-            $e->submitsForm();
+        return $this->onEnter(function($e) use ($methodName) {
+            $e->submitsForm($methodName);
         });
     }
 

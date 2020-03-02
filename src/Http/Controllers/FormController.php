@@ -2,11 +2,12 @@
 
 namespace Vuravel\Form\Http\Controllers;
 
-use Vuravel\Form\Components\Select;
 use App\Http\Controllers\Controller;
-use Vuravel\Form\Exceptions\MethodNotFoundException;
-use Vuravel\Form\Http\Requests\FormValidationRequest;
 use Vuravel\Core\Http\Requests\SessionAuthorizationRequest;
+use Vuravel\Form\Components\Select;
+use Vuravel\Form\Exceptions\MethodNotFoundException;
+use Vuravel\Form\Exceptions\HandleMethodNotFoundException;
+use Vuravel\Form\Http\Requests\FormValidationRequest;
 
 class FormController extends Controller
 {
@@ -19,6 +20,13 @@ class FormController extends Controller
     public function handleSubmit(FormValidationRequest $request)
     {
         $form = $request->vlObject();
+
+        if($method = $request->header('X-Vuravel-Handle')){
+            if(method_exists($form, $method))
+                return $form->{$method}($request);
+
+            throw (new HandleMethodNotFoundException)->setMessage($method);
+        }
 
         return $form->handle($request);
     }
