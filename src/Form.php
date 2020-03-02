@@ -2,9 +2,10 @@
 
 namespace Vuravel\Form;
 
-use Vuravel\Form\Components\Rows;
 use Vuravel\Core\Contracts\Routable;
 use Vuravel\Core\Traits\{IsRoutable, HasMetaTags};
+use Vuravel\Form\Components\Rows;
+use Vuravel\Form\Exceptions\IncludesMethodNotFoundException;
 use Vuravel\Form\Traits\{HasValidationRules, PersistsInSession, EloquentForm};
 
 class Form extends Rows implements Routable
@@ -83,7 +84,7 @@ class Form extends Rows implements Routable
         return $this->createdHook()
                     ->prepareForm()
                     ->prepareRecord()
-                    ->prepareComponents()
+                    ->prepareComponents($this->components())
                     ->addValidationRules($this->rules())
                     ->bootedHook();
     }
@@ -95,9 +96,14 @@ class Form extends Rows implements Routable
                     ->prepareRecord();
     }
 
-    public function finishReboot()
+    public function finishReboot($includes = null)
     {
-        return $this->prepareComponents()
+        if($includes && !method_exists($this, $includes))
+            throw (new IncludesMethodNotFoundException)->setMessage($includes);
+
+        return $this->prepareComponents(
+                        $includes ? $this->{$includes}() : $this->components()
+                    )
                     ->addValidationRules($this->rules())
                     ->bootedHook();
     }
@@ -164,9 +170,9 @@ class Form extends Rows implements Routable
      * @param  array  $components
      * @return void
      */
-    public function prepareComponents()
+    public function prepareComponents($components)
     {
-        $this->blueprint = new Blueprint($this->components());
+        $this->blueprint = new Blueprint($components);
         $this->components = $this->blueprint->getPreparedComponents($this);
 
         return $this;

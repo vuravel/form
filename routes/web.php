@@ -7,6 +7,9 @@ Route::namespace('Vuravel\Form\Http\Controllers')
 	Route::post('vuravel/form/handle', 'FormController@handleSubmit')
 		->name('handle');
 
+	Route::post('vuravel/form/include-fields', 'FormController@includeFields')
+		->name('include-fields');
+
 	Route::post('vuravel/form/db/update', 'FormController@updateRecord')
 		->name('db.update');
 

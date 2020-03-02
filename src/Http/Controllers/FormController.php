@@ -11,7 +11,7 @@ use Vuravel\Core\Http\Requests\SessionAuthorizationRequest;
 class FormController extends Controller
 {
     /**
-     * Updates the database according to the form specifications.
+     * Calls user-defined handle() method in Form Class.
      *
      * @param  Vuravel\Form\Http\Requests\FormValidationRequest $request
      * @return \Illuminate\Http\Response
@@ -20,7 +20,18 @@ class FormController extends Controller
     {
         $form = $request->vlObject();
 
-        return $form->handle($request); //Calls a user-defined public function handle() in Form Class
+        return $form->handle($request);
+    }
+
+    /**
+     * Includes additional fields from the Form Class.
+     *
+     * @param  Vuravel\Core\Http\Requests\SessionAuthorizationRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function includeFields(SessionAuthorizationRequest $request)
+    {
+        return $request->vlObject();
     }
 
     /**
