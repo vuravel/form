@@ -16,8 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vuravel\\Form\\": "src/",
-            "Vuravel\\Form\\Tests\\": "tests/"
+            "Vuravel\\Form\\": "src/"
         }
     },
     "extra": {
