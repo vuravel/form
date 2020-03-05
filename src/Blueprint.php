@@ -41,11 +41,11 @@ class Blueprint
      * @param  \Illuminate\Http\Request $request
      * @return void
      */
-    public function fillModelFromRequest($request, $record)
+    public function fillModelFromRequest($request, $form)
     {
-        collect($this->getFieldComponents())->each(function($field) use($request, $record) {
+        collect($this->getFieldComponents($form))->each(function($field) use ($request, $form) {
 
-            $field->fillBeforeSave($request, $record);
+            $field->fillBeforeSave($request, $form->record);
             
         });
     }
@@ -56,29 +56,29 @@ class Blueprint
      * @param  \Illuminate\Http\Request $request
      * @return void
      */
-    public function assignRelationsFromRequest($request, $record)
+    public function assignRelationsFromRequest($request, $form)
     {
-        collect($this->getFieldComponents())->each(function($field) use($request, $record){
+        collect($this->getFieldComponents($form))->each(function($field) use ($request, $form){
             
-            $field->fillAfterSave($request, $record);
+            $field->fillAfterSave($request, $form->record);
             
         });
 
-        $record->refresh($this->relationsArray());
+        $form->record->refresh($this->relationsArray($form));
     }
 
-    public function getFieldComponents()
+    public function getFieldComponents($form)
     {
-        return collect($this->components)->flatMap( function($component) {
+        return collect($this->components)->flatMap( function($component) use ($form) {
 
-            return $component->getFieldComponents();
+            return $component->getFieldComponents($form);
 
         })->filter();
     }
 
-    public function relationsArray()
+    public function relationsArray($form)
     {
-        return collect($this->getFieldComponents())->map(function($field){
+        return collect($this->getFieldComponents($form))->map(function($field){
             
             return $field->getRelationName();
         

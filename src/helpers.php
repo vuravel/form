@@ -32,7 +32,7 @@ if (! function_exists('response422')) {
 	{
 		//errors values should be arrays - because can have multiple ones...
 		foreach ($errors as $key => $value) {
-			$errors[$key] = is_array($value) ? $value : [$value];
+			$errors[$key] = (array) $value;
 		}
 		return response()->json(['errors' => $errors], 422);
 	}

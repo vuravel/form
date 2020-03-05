@@ -183,9 +183,9 @@ class Form extends Rows implements Routable
      *
      * @return array
      */
-    public function getFieldComponents()
+    public function getFieldComponents($form = null)  //when it is inside a parent form
     {
-        return $this->blueprint->getFieldComponents();
+        return $this->blueprint->getFieldComponents($form ?: $this);
     }
 
     /**

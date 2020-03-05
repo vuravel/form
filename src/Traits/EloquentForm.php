@@ -118,7 +118,7 @@ trait EloquentForm {
      */
     public function newModelInstanceFromRequest($request)
     {
-        $this->blueprint->fillModelFromRequest($request, $this->record);
+        $this->blueprint->fillModelFromRequest($request, $this);
         return $this->record->record;
     }
 
@@ -130,7 +130,7 @@ trait EloquentForm {
     public function saveRelationsFromRequest($request)
     {
         $this->afterSaveHook($this->record->record);
-        $this->blueprint->assignRelationsFromRequest($request, $this->record);
+        $this->blueprint->assignRelationsFromRequest($request, $this);
         $this->completedHook($this->record->record);
         return $this->returnResponse($this->record->record) ?: $this->record->record;
     }

@@ -52,11 +52,11 @@ class Layout extends Component
         return $this->data(['noMargins' => true]);
     }
 
-    public function getFieldComponents()
+    public function getFieldComponents($form)
     {
-        return collect($this->components)->flatMap( function($component) {
+        return collect($this->components)->flatMap( function($component) use ($form) {
 
-            return $component->getFieldComponents();
+            return $component->getFieldComponents($form);
 
         })->filter();
     }

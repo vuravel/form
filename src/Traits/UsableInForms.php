@@ -16,8 +16,14 @@ trait UsableInForms {
         //do nothing
     }    
 
-    public function getFieldComponents()
+    public function getFieldComponents($form)
     {
+        return array_merge(
+            $this->isField() ? [$this] : [],
+            $this->data('includes') ? $form->{$this->data('includes')}() : []
+        );
+
+        //to delete
         if($this->isField())
             return [$this];
     }

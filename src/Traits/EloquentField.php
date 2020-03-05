@@ -200,7 +200,7 @@ trait EloquentField {
      */
     public function fillBeforeSave($request, $record)
     {
-        if($this->doesNotFillBeforeSave())
+        if(!$request->has($this->name) || $this->doesNotFillBeforeSave())
             return;
 
         $this->setAttributeFromRequest($request, $record);
@@ -233,7 +233,7 @@ trait EloquentField {
      */
     public function fillAfterSave($request, $record)
     {
-        if($this->doesNotFillAfterSave())
+        if(!$request->has($this->name) || $this->doesNotFillAfterSave())
             return;
         
         if($this->forHasOne){
